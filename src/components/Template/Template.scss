@@ -1,0 +1,25 @@
+.template{
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: rgb(197, 193, 190);
+}
+
+.template__letter{
+    padding: 15px 20px;
+    font-size: 30px;
+    line-height: 100%;
+    border: 5px rgb(221, 200, 81) solid;
+    border-radius: 10px;
+    background-color: rgb(223, 204, 145);
+    margin: 1.5px;
+}
+.template__word{
+margin-top: 50px;
+position: absolute;
+display: flex;
+    &--stretch{
+        width: 50px;
+        flex-wrap: wrap;
+}
+}
