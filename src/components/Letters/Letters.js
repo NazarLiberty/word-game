@@ -39,6 +39,7 @@ export default class Letters extends React.Component {
                 if (text.length === 1) console.log(text)
                 for (let i = 0, child; child = childs[i]; i++) {
                     child.addEventListener('mouseover', inputRender)
+                    child.addEventListener('touchmove', inputRender)
                 }
             }
             const removeSelector = () => {
@@ -46,10 +47,13 @@ export default class Letters extends React.Component {
                 const childs = element.children
                 for (let i = 0, child; child = childs[i]; i++) {
                     child.removeEventListener('mouseover', inputRender)
+                    child.removeEventListener('touchmove', inputRender)
                 }
             }
             element.addEventListener('mousedown', addSelector)
             document.addEventListener('mouseup', removeSelector)
+            element.addEventListener('touchstart', addSelector)
+            document.addEventListener('touchend', removeSelector)
         }
     }
     render() {
