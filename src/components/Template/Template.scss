@@ -1,51 +1,94 @@
 .template{
-    margin-top: 80px;
+    margin-left: 30px;
+    margin-top: 15px;
     position: relative;
-    width: 400px;
-    transform: translate(50%);
-    margin-left: -300px;
-    max-height: 60vh;
+    width: 420px;
+    height: 450px;
+    @media screen and (max-width:578px) {
+        width: 320px;
+        margin-left: 0px;
+        height: 350px;
+        }
 }
 
 .template__letter{
     font-weight: bold;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    min-width: 70px;
-    min-height: 70px;
+    min-width: 50px;
+    min-height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
-    border: 5px rgb(221, 200, 81) solid;
+    border: 3px rgb(221, 200, 81) solid;
     border-radius: 10px;
     background-color: rgb(223, 204, 145);
     margin: 1.5px;
+    @media screen and (max-width:578px) {
+    min-width: 40px;
+    min-height: 40px;
+
+    }
 }
 .template__word{
 position: absolute;
 display: flex;
+font-size: 0px;
     &--stretch{
         width: 50px;
         flex-wrap: wrap;
     }  
+    &--visible{
+        font-size: 25px;
+        @media screen and (max-width:578px) {
+            font-size: 22px;
+            }
+    }
 }
-
+.index_0.template_1{
+top: 212px;
+left: 70px;
+@media screen and (max-width:578px) {
+    top: 173px;
+    left: 50px;
+    }
+}
 .index_1.template_1 {
- top: 292px;
+ top: 0px;
+ left: 70px;
+ @media screen and (max-width:578px) {
+    top: 0px;
+    left: 50px;
+    }
  }
 .index_2.template_1 {
-    top: -74px;
-    left: 220px;
+    top: 212px;
+    left: 70px;
+    @media screen and (max-width:578px) {
+        top: 173px;
+        left: 50px;
+        }
  }
 .index_3.template_1 {
-    top: 145px;
-    left: 146px;
+    top: 212px;
+    left: 282px;
+    @media screen and (max-width:578px) {
+        top: 173px;
+        left: 222px;
+        }
  }
  .index_4.template_1 {
-    top: -73px;
-    left: 74px;
+    top: 212px;
+    left: 176px;
+    @media screen and (max-width:578px) {
+        top: 173px;
+    left: 135px
+        }
     }
 .index_5.template_1 {
     top: 0px;
-    left: 146px;
+    left: 123px;
+    @media screen and (max-width:578px) {
+        top: 0px;
+        left: 93px;
+        }
 }

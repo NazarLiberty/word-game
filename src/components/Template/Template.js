@@ -2,14 +2,10 @@ import React from 'react'
 import './Template.scss'
 
 let keys = 0;
+let zIndex = 0;
 export default class Template extends React.Component {
-
     constructor(props) {
         super(props)
-        this.state = {
-            data: this.props.data,
-            currentLevel: 1,
-        }
         this.renderTemplateById = (type, wordsArr) => {
             // template #1
             return wordsArr.map((word, index) => {
@@ -18,26 +14,24 @@ export default class Template extends React.Component {
                     key={word.word}
                     templateNumber={type}
                     wordIndex={index}
+                    guessed={word.guessed}
                 />
             })
         }
     }
     render() {
-        const { currentLevel, data } = this.state
-        const template = data.map(el => {
-            const { level, templateNumber, words } = el
-            if (level === currentLevel) return this.renderTemplateById(1, words)
-            else return null
-        })
+        const { data: { words }, data: { templateNumber } } = this.props
+        const template = this.renderTemplateById(templateNumber, words)
         return <div className="template">
             {template}
         </div>
     }
 }
 
-const Word = ({ word, templateNumber, wordIndex }) => {
+const Word = ({ word, templateNumber, wordIndex, guessed }) => {
     const arr = [...word]
     let wordClass = "template__word"
+    if (guessed) wordClass += " template__word--visible"
     let stretch = false
 
     function templateChange(templateNum) {
@@ -47,26 +41,30 @@ const Word = ({ word, templateNumber, wordIndex }) => {
                 case 2: stretch = true; break;
                 case 4: stretch = true; break;
                 case 5: stretch = true; break;
-
+                case 3: stretch = true; break;
             }
-            if (stretch) wordClass += " template__word--stretch"
-            if (templateNumber === 1) wordClass += " template_1"
-            switch (wordIndex) {
-                case 0: stretch = wordClass += " index_0"; break;
-                case 1: stretch = wordClass += " index_1"; break;
-                case 2: stretch = wordClass += " index_2"; break;
-                case 3: stretch = wordClass += " index_3"; break;
-                case 4: stretch = wordClass += " index_4"; break;
-                case 5: stretch = wordClass += " index_5"; break;
-            }
+            wordClass += " template_1"
         }
-        else return null
+        // 
+        if (stretch) wordClass += " template__word--stretch"
+        switch (wordIndex) {
+            case 0: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 1: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 2: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 3: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 4: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 5: stretch = wordClass += ` index_${wordIndex}`; break;
+        }
+    }
+    // zet index
+    const style = {
+        zIndex: zIndex,
     }
     templateChange(templateNumber)
     const res = arr.map((e) => {
         return <div className="template__letter" key={keys++}>{e.toUpperCase()}</div>
     })
-    return <div className={wordClass}>
+    return <div className={wordClass} style={style} >
         {res}
     </div>
 }

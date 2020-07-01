@@ -2,9 +2,12 @@
     margin: 0px;
     box-sizing: border-box;
 }
-body{
+
+.wrapper{
+    background-color: rgb(197, 193, 190);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    background-color: rgb(197, 193, 190)
+    flex-direction: column;
+    align-items: center;
+    
 }

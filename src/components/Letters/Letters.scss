@@ -1,0 +1,95 @@
+.letters-block{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.letters{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 260px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: rgb(253, 161, 161);
+    position: relative;
+    @media screen and (max-width:578px) {
+        width: 220px;
+        height: 220px;
+        }
+}
+
+.letters__item{
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: skyblue;
+    border-radius: 50%;
+    font-size: 45px;
+    font-weight: bold;
+    @media screen and (max-width:578px) {
+        width: 55px;
+        height: 55px;
+        font-size: 38px;
+        }
+}
+.letters-input{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 10px;
+    font-weight: bold;
+    font-family: monospace;
+width: 230px;
+height: 50px;
+@media screen and (max-width:578px) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    }
+}
+.letters--index_0{
+    top: 5px;
+    left: 90px;
+    @media screen and (max-width:578px) {
+        top: 5px;
+        left: 80px;
+        }
+}
+.letters--index_1{
+    top: 55px;
+    left: 180px;
+    @media screen and (max-width:578px) {
+        top: 55px;
+        left: 155px;
+        }
+}
+.letters--index_2{
+    top: 155px;
+    left: 145px;
+    @media screen and (max-width:578px) {
+        top: 140px;
+        left: 135px;
+        }
+}
+.letters--index_3{
+    top: 155px;
+    left: 45px;
+    @media screen and (max-width:578px) {
+        top: 140px;
+        left: 35px;
+        }
+}
+.letters--index_4{
+    top: 55px;
+    left: 10px;
+}
