@@ -1,25 +1,51 @@
 .template{
+    margin-top: 80px;
     position: relative;
-    width: 800px;
-    height: 600px;
-    background-color: rgb(197, 193, 190);
+    width: 400px;
+    transform: translate(50%);
+    margin-left: -300px;
+    max-height: 60vh;
 }
 
 .template__letter{
-    padding: 15px 20px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    min-width: 70px;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 30px;
-    line-height: 100%;
     border: 5px rgb(221, 200, 81) solid;
     border-radius: 10px;
     background-color: rgb(223, 204, 145);
     margin: 1.5px;
 }
 .template__word{
-margin-top: 50px;
 position: absolute;
 display: flex;
     &--stretch{
         width: 50px;
         flex-wrap: wrap;
+    }  
 }
+
+.index_1.template_1 {
+ top: 292px;
+ }
+.index_2.template_1 {
+    top: -74px;
+    left: 220px;
+ }
+.index_3.template_1 {
+    top: 145px;
+    left: 146px;
+ }
+ .index_4.template_1 {
+    top: -73px;
+    left: 74px;
+    }
+.index_5.template_1 {
+    top: 0px;
+    left: 146px;
 }

@@ -2,3 +2,9 @@
     margin: 0px;
     box-sizing: border-box;
 }
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(197, 193, 190)
+}

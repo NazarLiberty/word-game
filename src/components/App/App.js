@@ -10,7 +10,14 @@ export default class App extends React.Component {
                 {
                     level: 1,
                     templateNumber: 1,
-                    words: ['taras', 'nazar']
+                    words: [
+                        { word: 'Тарас', guessed: true, },
+                        { word: 'Траса', guessed: true },
+                        { word: 'Тара', guessed: true },
+                        { word: 'Сара', guessed: true },
+                        { word: 'Раса', guessed: true },
+                        { word: 'Раста', guessed: true }
+                    ]
                 }]
         }
     }
