@@ -19,7 +19,13 @@ export default class App extends React.Component {
                         { word: 'Раса', guessed: true },
                         { word: 'Раста', guessed: true }
                     ],
-                    letters: ['А', 'Р', 'С', 'А', 'Т']
+                    letters: [
+                        { letter: 'А', id: 1 },
+                        { letter: 'Р', id: 2 },
+                        { letter: 'С', id: 3 },
+                        { letter: 'А', id: 4 },
+                        { letter: 'Т', id: 5 },
+                    ]
                 }],
             currentLevel: 1,
         }
@@ -35,7 +41,6 @@ export default class App extends React.Component {
         })
         const { letters } = levelData[0]
         const { ...WordsTemplate } = levelData[0]
-
         return <div className="wrapper">
             <Template data={WordsTemplate} />
             <Letters letters={letters} />
