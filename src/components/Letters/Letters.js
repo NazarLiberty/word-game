@@ -6,8 +6,16 @@ export default class Letters extends React.Component {
         super()
         this.state = {
             input: [],
+            selectedLetter: []
         }
         let obj = []
+        this.setSelectedLetter = (id) => {
+            this.setState(({ selectedLetter }) => {
+                const newArr = selectedLetter.map(el => el)
+                newArr.push(Number(id))
+                return { selectedLetter: newArr }
+            })
+        }
         this.setInput = (letter, id) => {
             let canRender = true;
             this.state.input.forEach(element => {
@@ -25,9 +33,13 @@ export default class Letters extends React.Component {
                 return { input: lettersData }
             })
         }
-        this.setInputByMouse = (event) => {
+        this.setLettersData = (letter, id) => {
+            this.setInput(letter, id)
+            this.setSelectedLetter(id)
+        }
+        this.setLettersDataByMouse = (event) => {
             const { innerText, id } = event.target
-            this.setInput(innerText, id)
+            this.setLettersData(innerText, id)
         }
         this.wordChecker = () => {
             console.log("CHECKING WORD WITH DATA...")
@@ -37,7 +49,7 @@ export default class Letters extends React.Component {
 
             const inputRender = (event) => {
 
-                this.setInputByMouse(event)
+                this.setLettersDataByMouse(event)
             }
             const getElemCoordTouch = (child) => {
                 if (obj.length < 5) obj.push({
@@ -50,6 +62,7 @@ export default class Letters extends React.Component {
                 })
             }
             const touchSelector = (event) => {
+                event.preventDefault()
                 const childs = element.children
                 let elementX = event.changedTouches[0].clientX
                 let elementY = event.changedTouches[0].clientY
@@ -59,7 +72,7 @@ export default class Letters extends React.Component {
                         elementY < yEnd &&
                         elementX > xStart &&
                         elementX < xEnd)
-                        this.setInput(value, id)
+                        this.setLettersData(value, id)
                 })
                 for (let i = 0, child; child = childs[i]; i++) {
                     getElemCoordTouch(child)
@@ -69,14 +82,18 @@ export default class Letters extends React.Component {
             const addSelector = (event) => {
                 const childs = element.children
                 const text = event.target.innerText
-                if (text.length === 1) this.setInputByMouse(event)
+                if (text.length === 1) this.setLettersDataByMouse(event)
                 for (let i = 0, child; child = childs[i]; i++) {
                     child.addEventListener('mouseover', inputRender)
                 }
             }
             const removeSelector = () => {
+                console.log(this.state.selectedLetter)
                 this.wordChecker()
-                this.setState({ input: [] })
+                this.setState({
+                    input: [],
+                    selectedLetter: []
+                })
                 const childs = element.children
                 for (let i = 0, child; child = childs[i]; i++) {
                     child.removeEventListener('mouseover', inputRender)
@@ -85,18 +102,25 @@ export default class Letters extends React.Component {
             element.addEventListener('mousedown', addSelector)
             document.addEventListener('mouseup', removeSelector)
             element.addEventListener('touchmove', touchSelector)
+            element.addEventListener('touchstart', touchSelector)
             document.addEventListener('touchend', removeSelector)
         }
     }
     render() {
-        const { input } = this.state
-
+        const { input, selectedLetter } = this.state
         const letters = this.props.letters.map((el, index) => {
             const { letter, id } = el;
+            let isSelectedLetter = false;
+            selectedLetter.forEach(selectedId => {
+                if (id === selectedId) isSelectedLetter = true
+            });
+            const letterClass = isSelectedLetter ?
+                `letters__item letters__item--selected letters--index_${index}` :
+                `letters__item letters--index_${index}`
             return <span
                 id={id}
                 key={id}
-                className={`letters__item letters--index_${index}`}>
+                className={letterClass}>
                 {letter}
             </span>
         })

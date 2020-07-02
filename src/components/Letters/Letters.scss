@@ -30,10 +30,12 @@ align-items: center;
     position: absolute;
     width: 70px;
     height: 70px;
-    background-color: skyblue;
     border-radius: 50%;
     font-size: 45px;
     font-weight: bold;
+    &--selected{
+        background-color: skyblue;
+    }
     @media screen and (max-width:578px) {
         width: 55px;
         height: 55px;
