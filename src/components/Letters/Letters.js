@@ -7,52 +7,84 @@ export default class Letters extends React.Component {
         this.state = {
             input: [],
         }
-        this.setInput = (event) => {
+        let obj = []
+        this.setInput = (letter, id) => {
             let canRender = true;
             this.state.input.forEach(element => {
-                if (element.id === event.target.id)
+                if (element.id === id)
                     canRender = false
             });
             if (canRender) this.setState(({ input }) => {
                 let lettersData = input.map(e => e)
                 lettersData.push(
                     {
-                        letter: event.target.innerText,
-                        id: event.target.id
+                        letter: letter,
+                        id: id
                     }
                 )
                 return { input: lettersData }
             })
         }
-        this.removeInput = () => {
-            this.setState({ input: [] })
+        this.setInputByMouse = (event) => {
+            const { innerText, id } = event.target
+            this.setInput(innerText, id)
+        }
+        this.wordChecker = () => {
+            console.log("CHECKING WORD WITH DATA...")
         }
         window.onload = () => {
             const element = document.getElementById('letters-block')
+
             const inputRender = (event) => {
-                this.setInput(event)
+
+                this.setInputByMouse(event)
+            }
+            const getElemCoordTouch = (child) => {
+                if (obj.length < 5) obj.push({
+                    value: child.innerText,
+                    id: child.id,
+                    xStart: Math.floor(child.getBoundingClientRect().x),
+                    xEnd: Math.floor(child.getBoundingClientRect().x + child.getBoundingClientRect().width),
+                    yStart: Math.floor(child.getBoundingClientRect().y),
+                    yEnd: Math.floor(child.getBoundingClientRect().y + child.getBoundingClientRect().height)
+                })
+            }
+            const touchSelector = (event) => {
+                const childs = element.children
+                let elementX = event.changedTouches[0].clientX
+                let elementY = event.changedTouches[0].clientY
+                obj.map(el => {
+                    const { yStart, yEnd, xStart, xEnd, value, id } = el
+                    if (elementY > yStart &&
+                        elementY < yEnd &&
+                        elementX > xStart &&
+                        elementX < xEnd)
+                        this.setInput(value, id)
+                })
+                for (let i = 0, child; child = childs[i]; i++) {
+                    getElemCoordTouch(child)
+
+                }
             }
             const addSelector = (event) => {
                 const childs = element.children
                 const text = event.target.innerText
-                if (text.length === 1) this.setInput(event)
-                if (text.length === 1) console.log(text)
+                if (text.length === 1) this.setInputByMouse(event)
                 for (let i = 0, child; child = childs[i]; i++) {
                     child.addEventListener('mouseover', inputRender)
-                    child.addEventListener('touchmove', inputRender)
                 }
             }
             const removeSelector = () => {
-                this.removeInput()
+                this.wordChecker()
+                this.setState({ input: [] })
                 const childs = element.children
                 for (let i = 0, child; child = childs[i]; i++) {
                     child.removeEventListener('mouseover', inputRender)
-                    child.removeEventListener('touchmove', inputRender)
                 }
             }
             element.addEventListener('mousedown', addSelector)
             document.addEventListener('mouseup', removeSelector)
-            element.addEventListener('touchstart', addSelector)
+            element.addEventListener('touchmove', touchSelector)
             document.addEventListener('touchend', removeSelector)
         }
     }
