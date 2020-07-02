@@ -48,7 +48,6 @@ export default class Letters extends React.Component {
             const element = document.getElementById('letters-block')
 
             const inputRender = (event) => {
-
                 this.setLettersDataByMouse(event)
             }
             const getElemCoordTouch = (child) => {
@@ -88,7 +87,6 @@ export default class Letters extends React.Component {
                 }
             }
             const removeSelector = () => {
-                console.log(this.state.selectedLetter)
                 this.wordChecker()
                 this.setState({
                     input: [],
@@ -101,6 +99,7 @@ export default class Letters extends React.Component {
             }
             element.addEventListener('mousedown', addSelector)
             document.addEventListener('mouseup', removeSelector)
+
             element.addEventListener('touchmove', touchSelector)
             element.addEventListener('touchstart', touchSelector)
             document.addEventListener('touchend', removeSelector)
