@@ -23,6 +23,7 @@ align-items: center;
 }
 
 .letters__item{
+    z-index: 10;
     font-family: monospace;
     display: flex;
     justify-content: center;
@@ -94,4 +95,12 @@ height: 50px;
 .letters--index_4{
     top: 55px;
     left: 10px;
+}
+.test{
+    border-radius: 50%;
+    width: 19px;
+    height:19px;
+    background-color: steelblue;
+    position: absolute;
+    z-index: 2;
 }

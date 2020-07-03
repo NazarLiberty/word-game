@@ -6,7 +6,8 @@ export default class Letters extends React.Component {
         super()
         this.state = {
             input: [],
-            selectedLetter: []
+            selectedLetter: [],
+            touchedLine: []
         }
         let obj = []
         this.setSelectedLetter = (id) => {
@@ -44,6 +45,20 @@ export default class Letters extends React.Component {
         this.wordChecker = () => {
             console.log("CHECKING WORD WITH DATA...")
         }
+        this.renderTouchLine = (x, y) => {
+            this.setState(({ touchedLine }) => {
+                const style = {
+                    left: x - 10,
+                    top: y,
+                }
+                const spanList = touchedLine.map(el => el)
+                spanList.push(<span
+                    className="test"
+                    style={style}>
+                </span>)
+                return { touchedLine: spanList }
+            })
+        }
         window.onload = () => {
             const element = document.getElementById('letters-block')
 
@@ -65,6 +80,7 @@ export default class Letters extends React.Component {
                 const childs = element.children
                 let elementX = event.changedTouches[0].clientX
                 let elementY = event.changedTouches[0].clientY
+                this.renderTouchLine(elementX, elementY)
                 obj.map(el => {
                     const { yStart, yEnd, xStart, xEnd, value, id } = el
                     if (elementY > yStart &&
@@ -90,7 +106,8 @@ export default class Letters extends React.Component {
                 this.wordChecker()
                 this.setState({
                     input: [],
-                    selectedLetter: []
+                    selectedLetter: [],
+                    touchedLine: []
                 })
                 const childs = element.children
                 for (let i = 0, child; child = childs[i]; i++) {
@@ -124,7 +141,8 @@ export default class Letters extends React.Component {
             </span>
         })
         const inputLabel = input.map(e => e.letter)
-        return <div className="letters-block">
+        return <div className="letters-block" id="test">
+            {this.state.touchedLine}
             <div className="letters-input">{inputLabel}</div>
             <div className="letters" id="letters-block">
                 {letters}
