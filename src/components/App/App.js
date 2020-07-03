@@ -29,21 +29,28 @@ export default class App extends React.Component {
                 }],
             currentLevel: 1,
         }
-
+        this.checker = (enterWord) => {
+            const { dataBase, currentLevel } = this.state
+            const word = enterWord.map((el) => el.letter).join("")
+            console.log(word)
+        }
+        this.levelChecker = (dataBase, currentLevel) => {
+            return dataBase.map(el => {
+                const { level, templateNumber, words, letters } = el
+                if (level === currentLevel) return { templateNumber, words, letters }
+                else return null
+            })
+        }
     }
-
     render() {
         const { dataBase, currentLevel } = this.state
-        const levelData = dataBase.map(el => {
-            const { level, templateNumber, words, letters } = el
-            if (level === currentLevel) return { templateNumber, words, letters }
-            else return null
-        })
+        const levelData = this.levelChecker(dataBase, currentLevel)
         const { letters } = levelData[0]
         const { ...WordsTemplate } = levelData[0]
         return <div className="wrapper">
             <Template data={WordsTemplate} />
-            <Letters letters={letters} />
+            <Letters letters={letters}
+                checker={this.checker} />
         </div>
     }
 }
