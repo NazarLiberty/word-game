@@ -34,8 +34,10 @@ align-items: center;
     border-radius: 50%;
     font-size: 45px;
     font-weight: bold;
+  
     &--selected{
         background-color: skyblue;
+        box-shadow: 0 0 50px rgb(71, 115, 133);
     }
     @media screen and (max-width:578px) {
         width: 55px;
@@ -55,6 +57,7 @@ align-items: center;
     font-family: monospace;
 width: 230px;
 height: 50px;
+
 @media screen and (max-width:578px) {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -95,12 +98,4 @@ height: 50px;
 .letters--index_4{
     top: 55px;
     left: 10px;
-}
-.test{
-    border-radius: 50%;
-    width: 19px;
-    height:19px;
-    background-color: steelblue;
-    position: absolute;
-    z-index: 2;
 }

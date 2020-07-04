@@ -26,23 +26,30 @@
     @media screen and (max-width:578px) {
     min-width: 40px;
     min-height: 40px;
-
     }
+}
+.template__letter-inner{
+    font-size:26px;
+    opacity: 0;
+    color: tomato;
+    @media screen and (max-width:578px) {
+        font-size:22px;
+        opacity: 0;
+        }
+        &--visible{
+            opacity: 1;
+            @media screen and (max-width:578px) {
+                opacity: 1;
+                }
+        }
 }
 .template__word{
 position: absolute;
 display: flex;
-font-size: 0px;
     &--stretch{
         width: 50px;
         flex-wrap: wrap;
     }  
-    &--visible{
-        font-size: 25px;
-        @media screen and (max-width:578px) {
-            font-size: 22px;
-            }
-    }
 }
 .index_0.template_1{
 top: 212px;

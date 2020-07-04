@@ -1,9 +1,11 @@
 * {
     margin: 0px;
     box-sizing: border-box;
+    
 }
 
 .wrapper{
+    overflow: hidden;
     background-color: rgb(197, 193, 190);
     min-height: 100vh;
     display: flex;

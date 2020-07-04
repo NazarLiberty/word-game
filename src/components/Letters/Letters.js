@@ -10,7 +10,6 @@ export default class Letters extends React.Component {
             touchedLine: []
         }
         let obj = []
-        let lineElement = 0;
         this.setSelectedLetter = (id) => {
             this.setState(({ selectedLetter }) => {
                 const newArr = selectedLetter.map(el => el)
@@ -44,25 +43,10 @@ export default class Letters extends React.Component {
             this.setLettersData(innerText, id)
         }
         this.wordChecker = (element) => {
-            const { checker } = this.props
-            console.log("CHECKING WORD WITH DATA...")
-            checker(element)
+            const { wordChecker } = this.props
+            wordChecker(element)
         }
-        this.renderTouchLine = (x, y) => {
-            this.setState(({ touchedLine }) => {
-                const style = {
-                    left: x - 10,
-                    top: y,
-                }
-                const spanList = touchedLine.map(el => el)
-                spanList.push(<span
-                    key={++lineElement}
-                    className="test"
-                    style={style}>
-                </span>)
-                return { touchedLine: spanList }
-            })
-        }
+
         window.onload = () => {
             const element = document.getElementById('letters-block')
 
@@ -80,25 +64,11 @@ export default class Letters extends React.Component {
                 })
             }
             const touchSelector = (event) => {
-                const letterBlockProperties = document.getElementById('letters-block').getBoundingClientRect()
-                const lettersBlockStartX = letterBlockProperties.x
-                const lettersBlockEndX = letterBlockProperties.x + letterBlockProperties.width
-                const letterBlockStartY = letterBlockProperties.y
-                const letterBlockEndY = letterBlockProperties.y + letterBlockProperties.height
-
                 const childs = element.children
                 let elementX = event.changedTouches[0].clientX
                 let elementY = event.changedTouches[0].clientY
-
                 event.preventDefault()
-
-                if (elementY > letterBlockStartY &&
-                    elementY < letterBlockEndY &&
-                    elementX > lettersBlockStartX &&
-                    elementX < lettersBlockEndX)
-                    this.renderTouchLine(elementX, elementY)
-
-                obj.map(el => {
+                obj.forEach(el => {
                     const { yStart, yEnd, xStart, xEnd, value, id } = el
                     if (elementY > yStart &&
                         elementY < yEnd &&
@@ -108,7 +78,6 @@ export default class Letters extends React.Component {
                 })
                 for (let i = 0, child; child = childs[i]; i++) {
                     getElemCoordTouch(child)
-
                 }
             }
             const addSelector = (event) => {
@@ -121,6 +90,7 @@ export default class Letters extends React.Component {
             }
             const removeSelector = () => {
                 this.wordChecker(this.state.input)
+                this.props.nextLevelChecker()
                 this.setState({
                     input: [],
                     selectedLetter: [],
