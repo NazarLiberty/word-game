@@ -32,12 +32,12 @@ export default class App extends React.Component {
                     level: 2,
                     templateNumber: 1,
                     words: [
-                        { word: 'крона', guessed: true, },
-                        { word: 'коран', guessed: true },
-                        { word: 'кора', guessed: true },
-                        { word: 'нора', guessed: true },
+                        { word: 'крона', guessed: false, },
+                        { word: 'коран', guessed: false },
+                        { word: 'кора', guessed: false },
+                        { word: 'нора', guessed: false },
                         { word: 'кран', guessed: false },
-                        { word: 'ранок', guessed: true }
+                        { word: 'ранок', guessed: false }
                     ],
                     letters: [
                         { letter: 'К', id: 1 },

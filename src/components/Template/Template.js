@@ -6,10 +6,12 @@ let keys = 0;
 export default class Template extends React.Component {
     constructor(props) {
         super(props)
+        const guessedWords = []
         this.renderTemplateById = (type, wordsArr) => {
             // template #1
             return wordsArr.map((word, index) => {
                 return <Word
+                    isWordGuessed={this.guessedWordsChecker}
                     word={word.word}
                     key={word.word}
                     templateNumber={type}
@@ -18,7 +20,13 @@ export default class Template extends React.Component {
                 />
             })
         }
-
+        this.addGuessedWord = (word) => {
+            guessedWords.push(word)
+        }
+        this.guessedWordsChecker = (word) => {
+            if (guessedWords.includes(word)) return true
+            else { this.addGuessedWord(word); return false }
+        }
     }
     render() {
         const { data: { words }, data: { templateNumber } } = this.props
@@ -29,14 +37,15 @@ export default class Template extends React.Component {
     }
 }
 
-const Word = ({ word, templateNumber, wordIndex, guessed }) => {
+const Word = ({ word, templateNumber, wordIndex, guessed, isWordGuessed }) => {
     const lettersArr = [...word]
     let zIndex = 0;
     let letterClass = "template__letter-inner"
     let wordClass = "template__word"
     if (guessed) {
-        letterClass += " template__letter-inner--visible animate__animated animate__fadeInUpBig";
         zIndex = 1
+        isWordGuessed(word) ? letterClass += " template__letter-inner--visible"
+            : letterClass += " template__letter-inner--visible animate__animated animate__fadeInUpBig"
     }
     let stretch = false
     function templateChange(templateNum) {
