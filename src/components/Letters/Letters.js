@@ -62,6 +62,7 @@ export default class Letters extends React.Component {
                     yStart: Math.floor(child.getBoundingClientRect().y),
                     yEnd: Math.floor(child.getBoundingClientRect().y + child.getBoundingClientRect().height)
                 })
+                else obj = []
             }
             const touchSelector = (event) => {
                 const childs = element.children

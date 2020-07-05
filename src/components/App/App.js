@@ -14,11 +14,11 @@ export default class App extends React.Component {
                     templateNumber: 1,
                     words: [
                         { word: 'Тарас', guessed: false, },
-                        { word: 'Траса', guessed: false },
-                        { word: 'Тара', guessed: false },
-                        { word: 'Сара', guessed: false },
-                        { word: 'Раса', guessed: false },
-                        { word: 'Раста', guessed: false }
+                        // { word: 'Траса', guessed: false },
+                        // { word: 'Тара', guessed: false },
+                        // { word: 'Сара', guessed: false },
+                        // { word: 'Раса', guessed: false },
+                        // { word: 'Раста', guessed: false }
                     ],
                     letters: [
                         { letter: 'А', id: 1 },
@@ -51,6 +51,8 @@ export default class App extends React.Component {
 
         }
         this.nextLevelChecker = () => {
+            console.log('next level checker')
+
             const { dataBase, currentLevel } = this.state
             const currentLevelData = this.levelChecker(dataBase, currentLevel)
             const { words } = currentLevelData[0]
@@ -89,6 +91,7 @@ export default class App extends React.Component {
     render() {
         const { dataBase, currentLevel } = this.state
         const levelData = this.levelChecker(dataBase, currentLevel)
+        console.log(levelData)
         const { letters } = levelData[0]
         const { ...WordsTemplate } = levelData[0]
         return <div className="wrapper">

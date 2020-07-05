@@ -44,8 +44,11 @@ const Word = ({ word, templateNumber, wordIndex, guessed, isWordGuessed }) => {
     let wordClass = "template__word"
     if (guessed) {
         zIndex = 1
-        isWordGuessed(word) ? letterClass += " template__letter-inner--visible"
-            : letterClass += " template__letter-inner--visible animate__animated animate__fadeInUpBig"
+        if (isWordGuessed(word)) {
+            letterClass += " template__letter-inner--visible"
+            zIndex++
+        }
+        else letterClass += " template__letter-inner--visible animate__animated animate__fadeInUpBig"
     }
     let stretch = false
     function templateChange(templateNum) {
