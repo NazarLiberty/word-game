@@ -14,11 +14,11 @@ export default class App extends React.Component {
                     templateNumber: 1,
                     words: [
                         { word: 'Тарас', guessed: false, },
-                        // { word: 'Траса', guessed: false },
-                        // { word: 'Тара', guessed: false },
-                        // { word: 'Сара', guessed: false },
-                        // { word: 'Раса', guessed: false },
-                        // { word: 'Раста', guessed: false }
+                        { word: 'Траса', guessed: false },
+                        { word: 'Тара', guessed: false },
+                        { word: 'Сара', guessed: false },
+                        { word: 'Раса', guessed: false },
+                        { word: 'Раста', guessed: false }
                     ],
                     letters: [
                         { letter: 'А', id: 1 },
