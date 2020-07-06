@@ -7,19 +7,19 @@ export default class App extends React.Component {
     constructor() {
         super()
         this.state = {
-            currentLevel: 2,
+            currentLevel: 1,
             dataBase: [
                 {
                     completed: false,
                     level: 1,
                     templateNumber: 1,
                     words: [
-                        { word: 'Тарас', guessed: true, },
-                        { word: 'Траса', guessed: true },
-                        { word: 'Тара', guessed: true },
-                        { word: 'Сара', guessed: true },
-                        { word: 'Раса', guessed: true },
-                        { word: 'Раста', guessed: true }
+                        { word: 'Тарас', guessed: false, },
+                        { word: 'Траса', guessed: false },
+                        { word: 'Тара', guessed: false },
+                        { word: 'Сара', guessed: false },
+                        { word: 'Раса', guessed: false },
+                        { word: 'Раста', guessed: false }
                     ],
                     letters: [
                         { letter: 'А', id: 1 },
@@ -34,12 +34,12 @@ export default class App extends React.Component {
                     level: 2,
                     templateNumber: 1,
                     words: [
-                        { word: 'крона', guessed: true, },
-                        { word: 'коран', guessed: true },
-                        { word: 'кора', guessed: true },
-                        { word: 'нора', guessed: true },
-                        { word: 'кран', guessed: true },
-                        { word: 'ранок', guessed: true }
+                        { word: 'крона', guessed: false, },
+                        { word: 'коран', guessed: false },
+                        { word: 'кора', guessed: false },
+                        { word: 'нора', guessed: false },
+                        { word: 'кран', guessed: false },
+                        { word: 'ранок', guessed: false }
                     ],
                     letters: [
                         { letter: 'К', id: 1 },
