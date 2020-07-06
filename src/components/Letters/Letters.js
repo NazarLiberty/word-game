@@ -7,7 +7,6 @@ export default class Letters extends React.Component {
         this.state = {
             input: [],
             selectedLetter: [],
-            touchedLine: []
         }
         let obj = []
         this.setSelectedLetter = (id) => {
@@ -109,9 +108,15 @@ export default class Letters extends React.Component {
             element.addEventListener('touchstart', touchSelector)
             document.addEventListener('touchend', removeSelector)
         }
+
     }
+
     render() {
+        const { completed } = this.props
         const { input, selectedLetter } = this.state
+        let lettersBlockClass = 'letters-block animate__animated'
+        completed ? lettersBlockClass += " animate__rollOut animate__delay-1s"
+            : lettersBlockClass += " animate__rollIn"
         const letters = this.props.letters.map((el, index) => {
             const { letter, id } = el;
             let isSelectedLetter = false;
@@ -129,8 +134,7 @@ export default class Letters extends React.Component {
             </span>
         })
         const inputLabel = input.map(e => e.letter)
-        return <div className="letters-block" id="test">
-            {this.state.touchedLine}
+        return <div className={lettersBlockClass}>
             <div className="letters-input">{inputLabel}</div>
             <div className="letters" id="letters-block">
                 {letters}

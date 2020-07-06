@@ -26,14 +26,14 @@ export default class Template extends React.Component {
         this.guessedWordsChecker = (word) => {
             if (guessedWords.includes(word)) return true
             else { this.addGuessedWord(word); return false }
+
         }
     }
     render() {
         const { data: { words }, data: { templateNumber }, data: { completed } } = this.props
-        console.log(completed)
         let templateClass = 'template'
-        if (completed) templateClass += ' animate__animated animate__fadeOutUp animate__delay-1s'
-        else templateClass += ' animate__animated animate__zoomInRight'
+        if (completed) templateClass += ' animate__animated animate__flipOutY animate__delay-1s'
+        else templateClass += ' animate__animated animate__flipInY'
         const template = this.renderTemplateById(templateNumber, words)
         return <div className={templateClass}>
             {template}

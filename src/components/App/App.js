@@ -7,19 +7,19 @@ export default class App extends React.Component {
     constructor() {
         super()
         this.state = {
-            currentLevel: 1,
+            currentLevel: 2,
             dataBase: [
                 {
                     completed: false,
                     level: 1,
                     templateNumber: 1,
                     words: [
-                        { word: 'Тарас', guessed: false, },
-                        { word: 'Траса', guessed: false },
-                        { word: 'Тара', guessed: false },
-                        // { word: 'Сара', guessed: false },
-                        // { word: 'Раса', guessed: false },
-                        // { word: 'Раста', guessed: false }
+                        { word: 'Тарас', guessed: true, },
+                        { word: 'Траса', guessed: true },
+                        { word: 'Тара', guessed: true },
+                        { word: 'Сара', guessed: true },
+                        { word: 'Раса', guessed: true },
+                        { word: 'Раста', guessed: true }
                     ],
                     letters: [
                         { letter: 'А', id: 1 },
@@ -34,12 +34,12 @@ export default class App extends React.Component {
                     level: 2,
                     templateNumber: 1,
                     words: [
-                        { word: 'крона', guessed: false, },
-                        { word: 'коран', guessed: false },
-                        { word: 'кора', guessed: false },
-                        { word: 'нора', guessed: false },
-                        { word: 'кран', guessed: false },
-                        { word: 'ранок', guessed: false }
+                        { word: 'крона', guessed: true, },
+                        { word: 'коран', guessed: true },
+                        { word: 'кора', guessed: true },
+                        { word: 'нора', guessed: true },
+                        { word: 'кран', guessed: true },
+                        { word: 'ранок', guessed: true }
                     ],
                     letters: [
                         { letter: 'К', id: 1 },
@@ -70,8 +70,9 @@ export default class App extends React.Component {
             const wordsLeft = words.filter((element) => element.guessed === false)
             const levelCompleted = wordsLeft.length === 0 ? true : false
             const levelIsLoading = currentLevelData[0].completed
-            if (!levelIsLoading && levelCompleted) setTimeout(this.nextLevel, 1900)
-            if (levelCompleted) this.setCompletedLevel(currentLevelData[0])
+            // next lvl trigger
+            // if (!levelIsLoading && levelCompleted) setTimeout(this.nextLevel, 1900)
+            // if (levelCompleted) this.setCompletedLevel(currentLevelData[0])
         }
         this.wordChecker = (enterWord) => {
             const { dataBase, currentLevel } = this.state
