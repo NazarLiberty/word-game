@@ -71,8 +71,8 @@ export default class App extends React.Component {
             const levelCompleted = wordsLeft.length === 0 ? true : false
             const levelIsLoading = currentLevelData[0].completed
             // next lvl trigger
-            // if (!levelIsLoading && levelCompleted) setTimeout(this.nextLevel, 1900)
-            // if (levelCompleted) this.setCompletedLevel(currentLevelData[0])
+            if (!levelIsLoading && levelCompleted) setTimeout(this.nextLevel, 1900)
+            if (levelCompleted) this.setCompletedLevel(currentLevelData[0])
         }
         this.wordChecker = (enterWord) => {
             const { dataBase, currentLevel } = this.state
