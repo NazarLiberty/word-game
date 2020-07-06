@@ -10,15 +10,16 @@ export default class App extends React.Component {
             currentLevel: 1,
             dataBase: [
                 {
+                    completed: false,
                     level: 1,
                     templateNumber: 1,
                     words: [
                         { word: 'Тарас', guessed: false, },
                         { word: 'Траса', guessed: false },
                         { word: 'Тара', guessed: false },
-                        { word: 'Сара', guessed: false },
-                        { word: 'Раса', guessed: false },
-                        { word: 'Раста', guessed: false }
+                        // { word: 'Сара', guessed: false },
+                        // { word: 'Раса', guessed: false },
+                        // { word: 'Раста', guessed: false }
                     ],
                     letters: [
                         { letter: 'А', id: 1 },
@@ -29,6 +30,7 @@ export default class App extends React.Component {
                     ]
                 },
                 {
+                    completed: false,
                     level: 2,
                     templateNumber: 1,
                     words: [
@@ -50,15 +52,26 @@ export default class App extends React.Component {
             ],
 
         }
+        this.setCompletedLevel = (completedLevelObj) => {
+            this.setState(({ dataBase }) => {
+                completedLevelObj.completed = true;
+                const newData = dataBase.map((el) => {
+                    if (this.state.currentLevel === el.level)
+                        return el = completedLevelObj
+                    else return el
+                })
+                return { dataBase: newData }
+            })
+        }
         this.nextLevelChecker = () => {
-            console.log('next level checker')
-
             const { dataBase, currentLevel } = this.state
             const currentLevelData = this.levelChecker(dataBase, currentLevel)
             const { words } = currentLevelData[0]
             const wordsLeft = words.filter((element) => element.guessed === false)
             const levelCompleted = wordsLeft.length === 0 ? true : false
-            if (levelCompleted) setTimeout(this.nextLevel, 1500)
+            const levelIsLoading = currentLevelData[0].completed
+            if (!levelIsLoading && levelCompleted) setTimeout(this.nextLevel, 1900)
+            if (levelCompleted) this.setCompletedLevel(currentLevelData[0])
         }
         this.wordChecker = (enterWord) => {
             const { dataBase, currentLevel } = this.state
@@ -75,8 +88,8 @@ export default class App extends React.Component {
         }
         this.levelChecker = (dataBase, currentLevel) => {
             return dataBase.filter(el => {
-                const { level, templateNumber, words, letters } = el
-                if (level === currentLevel) return { templateNumber, words, letters }
+                const { level } = el
+                if (level === currentLevel) return el
             })
         }
         this.nextLevel = () => {
@@ -91,15 +104,17 @@ export default class App extends React.Component {
     render() {
         const { dataBase, currentLevel } = this.state
         const levelData = this.levelChecker(dataBase, currentLevel)
-        console.log(levelData)
         const { letters } = levelData[0]
+        const { completed } = levelData[0]
         const { ...WordsTemplate } = levelData[0]
+
         return <div className="wrapper">
 
             <Template
                 data={WordsTemplate} />
 
             <Letters
+                completed={completed}
                 letters={letters}
                 wordChecker={this.wordChecker}
                 nextLevelChecker={this.nextLevelChecker} />

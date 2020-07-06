@@ -29,9 +29,13 @@ export default class Template extends React.Component {
         }
     }
     render() {
-        const { data: { words }, data: { templateNumber } } = this.props
+        const { data: { words }, data: { templateNumber }, data: { completed } } = this.props
+        console.log(completed)
+        let templateClass = 'template'
+        if (completed) templateClass += ' animate__animated animate__fadeOutUp animate__delay-1s'
+        else templateClass += ' animate__animated animate__zoomInRight'
         const template = this.renderTemplateById(templateNumber, words)
-        return <div className="template">
+        return <div className={templateClass}>
             {template}
         </div>
     }
@@ -48,7 +52,7 @@ const Word = ({ word, templateNumber, wordIndex, guessed, isWordGuessed }) => {
             letterClass += " template__letter-inner--visible"
             zIndex++
         }
-        else letterClass += " template__letter-inner--visible animate__animated animate__fadeInUpBig"
+        else letterClass += " template__letter-inner--visible animate__animated animate__jackInTheBox"
     }
     let stretch = false
     function templateChange(templateNum) {
