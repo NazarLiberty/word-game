@@ -14,7 +14,8 @@ align-items: center;
     width: 260px;
     height: 250px;
     border-radius: 50%;
-    background-color: rgb(253, 161, 161);
+    background-color: rgba(160, 137, 60, 0.733);
+    color:  rgb(0, 0, 0);
     position: relative;
     @media screen and (max-width:578px) {
         width: 220px;
@@ -46,6 +47,7 @@ align-items: center;
         }
 }
 .letters-input{
+    color: white;
     display: flex;
     justify-content: space-around;
     align-items: center;

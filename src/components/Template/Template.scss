@@ -1,7 +1,7 @@
 .template{
     margin-left: 30px;
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     position: relative;
     width: 420px;
     height: 420px;
@@ -32,7 +32,7 @@
 .template__letter-inner{
     opacity: 0;
     font-size:26px;
-    color: tomato;
+    color: black;
     @media screen and (max-width:578px) {
         font-size:22px;
         opacity: 0;
