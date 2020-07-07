@@ -67,6 +67,15 @@ const Word = ({ word, templateNumber, wordIndex, guessed, isWordGuessed }) => {
             }
             wordClass += " template_1"
         }
+        if (templateNum === 2) {
+            switch (wordIndex) {
+                case 1: stretch = true; break;
+                case 5: stretch = true; break;
+                case 3: stretch = true; break;
+                default: break
+            }
+            wordClass += " template_2"
+        }
         // 
         if (stretch) wordClass += " template__word--stretch"
         switch (wordIndex) {

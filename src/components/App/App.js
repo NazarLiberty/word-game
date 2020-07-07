@@ -7,7 +7,7 @@ export default class App extends React.Component {
     constructor() {
         super()
         this.state = {
-            currentLevel: 1,
+            currentLevel: 2,
             dataBase: [
                 {
                     completed: false,
@@ -32,14 +32,14 @@ export default class App extends React.Component {
                 {
                     completed: false,
                     level: 2,
-                    templateNumber: 1,
+                    templateNumber: 2,
                     words: [
-                        { word: 'крона', guessed: false, },
-                        { word: 'коран', guessed: false },
-                        { word: 'кора', guessed: false },
-                        { word: 'нора', guessed: false },
-                        { word: 'кран', guessed: false },
-                        { word: 'ранок', guessed: false }
+                        { word: 'декор', guessed: true, },
+                        { word: 'кредо', guessed: true },
+                        { word: 'кедр', guessed: true },
+                        { word: 'деко', guessed: true },
+                        { word: 'код', guessed: true },
+                        { word: 'рок', guessed: true }
                     ],
                     letters: [
                         { letter: 'К', id: 1 },
@@ -119,7 +119,6 @@ export default class App extends React.Component {
                 letters={letters}
                 wordChecker={this.wordChecker}
                 nextLevelChecker={this.nextLevelChecker} />
-
         </div>
     }
 }
