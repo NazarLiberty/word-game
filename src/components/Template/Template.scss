@@ -1,7 +1,8 @@
 .template{
+    color: white;
     margin-left: 30px;
+    margin-bottom: 10px;
     margin-top: 5px;
-    margin-bottom: 15px;
     position: relative;
     width: 420px;
     height: 420px;
@@ -20,9 +21,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px rgb(221, 200, 81) solid;
-    border-radius: 10px;
-    background-color: rgb(223, 204, 145);
+    border: 1.5px #679289 solid;
+    border-radius: 7px;
+    background-color:  #071e22d3;
     margin: 1.5px;
     @media screen and (max-width:578px) {
     min-width: 45px;
@@ -32,7 +33,6 @@
 .template__letter-inner{
     opacity: 0;
     font-size:26px;
-    color: black;
     @media screen and (max-width:578px) {
         font-size:22px;
         opacity: 0;
@@ -116,7 +116,7 @@ left: 70px;
      left: 136px;
      @media screen and (max-width:578px) {
         top: 0px;
-        left: 85px;
+        left: 86px;
         }
      }
     .index_2.template_2 {
@@ -151,3 +151,56 @@ left: 70px;
             left: 182px;
             }
     }
+
+    
+// TL 3
+
+.index_0.template_3{
+    top: 212px;
+    left: 70px;
+    @media screen and (max-width:578px) {
+        top: 193px;
+        left: 50px;
+        }
+    }
+    .index_1.template_3 {
+     top: 0px;
+     left: 70px;
+     @media screen and (max-width:578px) {
+        top: 0px;
+        left: 50px;
+        }
+     }
+    .index_2.template_3 {
+        top: 212px;
+        left: 70px;
+        @media screen and (max-width:578px) {
+            top: 193px;
+            left: 50px;
+            }
+     }
+    .index_3.template_3 {
+        top: 212px;
+        left: 282px;
+        @media screen and (max-width:578px) {
+            top: 193px;
+            left: 242px;
+            }
+     }
+     .index_4.template_3 {
+        top: 212px;
+        left: 176px;
+        @media screen and (max-width:578px) {
+            top: 193px;
+        left: 145px
+            }
+        }
+    .index_5.template_3 {
+        top: 0px;
+        left: 123px;
+        @media screen and (max-width:578px) {
+            top: 0px;
+            left: 98px;
+            }
+    }
+    

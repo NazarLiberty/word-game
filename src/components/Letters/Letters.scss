@@ -5,6 +5,7 @@ justify-content: center;
 align-items: center;
 }
 .letters{
+
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -14,7 +15,8 @@ align-items: center;
     width: 260px;
     height: 250px;
     border-radius: 50%;
-    background-color: rgba(160, 137, 60, 0.733);
+    background-color: #679289;
+    opacity: .75;
     color:  rgb(0, 0, 0);
     position: relative;
     @media screen and (max-width:578px) {
@@ -22,7 +24,21 @@ align-items: center;
         height: 220px;
         }
 }
-
+.misc-words-btn{
+    border: 1px solid #071e22d3;
+    background-color: #679289;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    left: -18%;
+    bottom: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:22px;
+    font-family: monospace;
+}
 .letters__item{
     z-index: 10;
     font-family: monospace;
@@ -38,7 +54,7 @@ align-items: center;
   
     &--selected{
         background-color: skyblue;
-        box-shadow: 0 0 50px rgb(71, 115, 133);
+        box-shadow: 0 0 50px #679289
     }
     @media screen and (max-width:578px) {
         width: 55px;

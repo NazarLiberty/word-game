@@ -8,7 +8,7 @@ export default class Letters extends React.Component {
             input: [],
             selectedLetter: [],
         }
-        let obj = []
+        let lettersCoord = []
         this.setSelectedLetter = (id) => {
             this.setState(({ selectedLetter }) => {
                 const newArr = selectedLetter.map(el => el)
@@ -53,7 +53,7 @@ export default class Letters extends React.Component {
                 this.setLettersDataByMouse(event)
             }
             const getElemCoordTouch = (child) => {
-                if (obj.length < 5) obj.push({
+                if (lettersCoord.length < 5) lettersCoord.push({
                     value: child.innerText,
                     id: child.id,
                     xStart: Math.floor(child.getBoundingClientRect().x),
@@ -61,14 +61,14 @@ export default class Letters extends React.Component {
                     yStart: Math.floor(child.getBoundingClientRect().y),
                     yEnd: Math.floor(child.getBoundingClientRect().y + child.getBoundingClientRect().height)
                 })
-                else obj = []
+                else lettersCoord = []
             }
             const touchSelector = (event) => {
                 const childs = element.children
                 let elementX = event.changedTouches[0].clientX
                 let elementY = event.changedTouches[0].clientY
                 event.preventDefault()
-                obj.forEach(el => {
+                lettersCoord.forEach(el => {
                     const { yStart, yEnd, xStart, xEnd, value, id } = el
                     if (elementY > yStart &&
                         elementY < yEnd &&
@@ -112,8 +112,9 @@ export default class Letters extends React.Component {
     }
 
     render() {
-        const { completed } = this.props
+        const { completed, onToggleModal, miscWords = [] } = this.props
         const { input, selectedLetter } = this.state
+        const miscWordsCount = miscWords.filter(el => el.guessed).length
         let lettersBlockClass = 'letters-block animate__animated'
         completed ? lettersBlockClass += " animate__rollOut animate__delay-1s"
             : lettersBlockClass += " animate__rollIn"
@@ -134,8 +135,14 @@ export default class Letters extends React.Component {
             </span>
         })
         const inputLabel = input.map(e => e.letter)
+        let btnClass = `misc-words-btn animate__animated animate__rubberBand`
+        if (miscWordsCount % 2 !== 0)
+            btnClass = 'misc-words-btn animate__animated animate__shakeY'
         return <div className={lettersBlockClass}>
             <div className="letters-input">{inputLabel}</div>
+            {miscWordsCount > 0 && <div className={btnClass} onClick={onToggleModal}>
+                {miscWordsCount}
+            </div>}
             <div className="letters" id="letters-block">
                 {letters}
             </div >

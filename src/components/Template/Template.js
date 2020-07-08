@@ -52,7 +52,7 @@ const Word = ({ word, templateNumber, wordIndex, guessed, isWordGuessed }) => {
             letterClass += " template__letter-inner--visible"
             zIndex++
         }
-        else letterClass += " template__letter-inner--visible animate__animated animate__jackInTheBox"
+        else letterClass += " template__letter-inner--visible animate__animated animate__fadeInUp"
     }
     let stretch = false
     function templateChange(templateNum) {
@@ -75,6 +75,16 @@ const Word = ({ word, templateNumber, wordIndex, guessed, isWordGuessed }) => {
                 default: break
             }
             wordClass += " template_2"
+        }
+        if (templateNum === 3) {
+            switch (wordIndex) {
+                case 2: stretch = true; break;
+                case 4: stretch = true; break;
+                case 5: stretch = true; break;
+                case 3: stretch = true; break;
+                default: break
+            }
+            wordClass += " template_3"
         }
         // 
         if (stretch) wordClass += " template__word--stretch"

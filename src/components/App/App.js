@@ -2,55 +2,22 @@ import React from 'react'
 import './App.scss'
 import Template from '../Template/Template'
 import Letters from '../Letters/Letters'
+import MiscWords from '../MiscWords/MiscWords'
+import data from '../../data/data'
 
 export default class App extends React.Component {
     constructor() {
         super()
         this.state = {
+            modalActive: false,
             currentLevel: 1,
-            dataBase: [
-                {
-                    completed: false,
-                    level: 1,
-                    templateNumber: 1,
-                    words: [
-                        { word: 'Тарас', guessed: false, },
-                        { word: 'Траса', guessed: false },
-                        { word: 'Тара', guessed: false },
-                        { word: 'Сара', guessed: false },
-                        { word: 'Раса', guessed: false },
-                        { word: 'Раста', guessed: false }
-                    ],
-                    letters: [
-                        { letter: 'А', id: 1 },
-                        { letter: 'Р', id: 2 },
-                        { letter: 'С', id: 3 },
-                        { letter: 'А', id: 4 },
-                        { letter: 'Т', id: 5 },
-                    ]
-                },
-                {
-                    completed: false,
-                    level: 2,
-                    templateNumber: 2,
-                    words: [
-                        { word: 'декор', guessed: false, },
-                        { word: 'кредо', guessed: false },
-                        { word: 'кедр', guessed: false },
-                        { word: 'деко', guessed: false },
-                        { word: 'код', guessed: false },
-                        { word: 'рок', guessed: false }
-                    ],
-                    letters: [
-                        { letter: 'К', id: 1 },
-                        { letter: 'Р', id: 2 },
-                        { letter: 'О', id: 3 },
-                        { letter: 'Д', id: 4 },
-                        { letter: 'Е', id: 5 },
-                    ]
-                },
-            ],
-
+            dataBase: data,
+        }
+        this.toggleModal = () => {
+            this.setState(({ modalActive }) => {
+                const newState = !modalActive
+                return { modalActive: newState }
+            })
         }
         this.setCompletedLevel = (completedLevelObj) => {
             this.setState(({ dataBase }) => {
@@ -78,11 +45,16 @@ export default class App extends React.Component {
             const { dataBase, currentLevel } = this.state
             const word = enterWord.map((el) => el.letter).join("")
             const newData = dataBase.map((element) => {
-                if (currentLevel === element.level)
+                if (currentLevel === element.level) {
                     element.words.map((elWord) => {
                         const rightWord = elWord.word.toUpperCase()
                         if (rightWord === word) elWord.guessed = true
                     })
+                    element.miscWords.map((elWord) => {
+                        const miscWord = elWord.word.toUpperCase()
+                        if (miscWord === word) elWord.guessed = true
+                    })
+                }
                 return element
             })
             this.setState({ dataBase: newData })
@@ -103,10 +75,11 @@ export default class App extends React.Component {
 
     }
     render() {
-        const { dataBase, currentLevel } = this.state
+        const { dataBase, currentLevel, modalActive } = this.state
         const levelData = this.levelChecker(dataBase, currentLevel)
         const { letters } = levelData[0]
         const { completed } = levelData[0]
+        const { miscWords } = levelData[0]
         const { ...WordsTemplate } = levelData[0]
 
         return <div className="wrapper">
@@ -115,10 +88,17 @@ export default class App extends React.Component {
                 data={WordsTemplate} />
 
             <Letters
+                miscWords={miscWords}
+                onToggleModal={this.toggleModal}
                 completed={completed}
                 letters={letters}
                 wordChecker={this.wordChecker}
                 nextLevelChecker={this.nextLevelChecker} />
+
+            <MiscWords
+                miscWords={miscWords}
+                onToggleModal={this.toggleModal}
+                isModalActive={modalActive} />
         </div>
     }
 }
