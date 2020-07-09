@@ -3,6 +3,8 @@ import './App.scss'
 import Template from '../Template/Template'
 import Letters from '../Letters/Letters'
 import MiscWords from '../MiscWords/MiscWords'
+import LevelPassedAlert from '../LevelPassedAlert/LevelPassedAlert'
+import GamePassedScreen from '../GamePassedScreen/GamePassedScreen'
 import data from '../../data/data'
 
 export default class App extends React.Component {
@@ -10,8 +12,11 @@ export default class App extends React.Component {
         super()
         this.state = {
             modalActive: false,
-            currentLevel: 1,
+            currentLevel: 4,
             dataBase: data,
+        }
+        this.onRestartGame = () => {
+            this.setState({ currentLevel: 1 })
         }
         this.toggleModal = () => {
             this.setState(({ modalActive }) => {
@@ -33,13 +38,15 @@ export default class App extends React.Component {
         this.nextLevelChecker = () => {
             const { dataBase, currentLevel } = this.state
             const currentLevelData = this.levelChecker(dataBase, currentLevel)
-            const { words } = currentLevelData[0]
-            const wordsLeft = words.filter((element) => element.guessed === false)
-            const levelCompleted = wordsLeft.length === 0 ? true : false
-            const levelIsLoading = currentLevelData[0].completed
-            // next lvl trigger
-            if (!levelIsLoading && levelCompleted) setTimeout(this.nextLevel, 1900)
-            if (levelCompleted) this.setCompletedLevel(currentLevelData[0])
+            if (currentLevelData.length > 0) {
+                const { words } = currentLevelData[0]
+                const wordsLeft = words.filter((element) => element.guessed === false)
+                const levelCompleted = wordsLeft.length === 0 ? true : false
+                const levelIsLoading = currentLevelData[0].completed
+                // next lvl trigger
+                if (!levelIsLoading && levelCompleted) setTimeout(this.nextLevel, 2200)
+                if (levelCompleted) this.setCompletedLevel(currentLevelData[0])
+            }
         }
         this.wordChecker = (enterWord) => {
             const { dataBase, currentLevel } = this.state
@@ -77,28 +84,41 @@ export default class App extends React.Component {
     render() {
         const { dataBase, currentLevel, modalActive } = this.state
         const levelData = this.levelChecker(dataBase, currentLevel)
-        const { letters } = levelData[0]
-        const { completed } = levelData[0]
-        const { miscWords } = levelData[0]
-        const { ...WordsTemplate } = levelData[0]
+        if (levelData.length > 0) {
 
-        return <div className="wrapper">
+            const { completed, miscWords, letters, level } = levelData[0]
+            const { ...WordsTemplate } = levelData[0]
+            const levelsAmmount = dataBase.length
+            const nextLevelData = this.levelChecker(dataBase, currentLevel + 1)
+            return <div className="wrapper">
 
-            <Template
-                data={WordsTemplate} />
+                <Template
+                    completed={completed}
+                    data={WordsTemplate} />
 
-            <Letters
-                miscWords={miscWords}
-                onToggleModal={this.toggleModal}
-                completed={completed}
-                letters={letters}
-                wordChecker={this.wordChecker}
-                nextLevelChecker={this.nextLevelChecker} />
+                <Letters
+                    miscWords={miscWords}
+                    onToggleModal={this.toggleModal}
+                    completed={completed}
+                    letters={letters}
+                    wordChecker={this.wordChecker}
+                    nextLevelChecker={this.nextLevelChecker} />
 
-            <MiscWords
-                miscWords={miscWords}
-                onToggleModal={this.toggleModal}
-                isModalActive={modalActive} />
+                <MiscWords
+                    miscWords={miscWords}
+                    onToggleModal={this.toggleModal}
+                    isModalActive={modalActive} />
+
+                {completed && <LevelPassedAlert
+                    level={level}
+                    nextLevelData={nextLevelData}
+                    levelsAmmount={levelsAmmount} />}
+
+            </div>
+        }
+        else return <div className="wrapper">
+            <GamePassedScreen
+                onRestartGame={this.onRestartGame} />
         </div>
     }
 }

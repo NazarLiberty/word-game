@@ -1,0 +1,33 @@
+.final-screen{
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    color: white;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Merienda One', cursive;
+}
+.final-screen__button{
+    margin-top: 20px;
+    width: 220px;
+    height: 60px;
+    border-radius: 20px;
+    font-size: 21px;
+    background-color: #071e22f6;
+    color: white;
+    text-transform: uppercase;
+    border: 0px;
+    transition: ease 1s all;
+    &:hover{
+        background-color: #679289;
+        cursor: pointer;
+    }
+    &:focus{
+        outline: none;
+    }
+    &:active{
+        transition: none;
+        background-color: rgb(56, 136, 40);
+    }
+}

@@ -2,8 +2,8 @@ import React from 'react'
 import './Letters.scss'
 
 export default class Letters extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             input: [],
             selectedLetter: [],
@@ -112,13 +112,13 @@ export default class Letters extends React.Component {
     }
 
     render() {
-        const { completed, onToggleModal, miscWords = [] } = this.props
+        const { completed, onToggleModal, miscWords, letters } = this.props
         const { input, selectedLetter } = this.state
         const miscWordsCount = miscWords.filter(el => el.guessed).length
         let lettersBlockClass = 'letters-block animate__animated'
         completed ? lettersBlockClass += " animate__rollOut animate__delay-1s"
             : lettersBlockClass += " animate__rollIn"
-        const letters = this.props.letters.map((el, index) => {
+        const lettersElement = letters.map((el, index) => {
             const { letter, id } = el;
             let isSelectedLetter = false;
             selectedLetter.forEach(selectedId => {
@@ -144,7 +144,7 @@ export default class Letters extends React.Component {
                 {miscWordsCount}
             </div>}
             <div className="letters" id="letters-block">
-                {letters}
+                {lettersElement}
             </div >
         </div>
     }
