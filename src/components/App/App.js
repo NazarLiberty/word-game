@@ -12,11 +12,24 @@ export default class App extends React.Component {
         super()
         this.state = {
             modalActive: false,
-            currentLevel: 4,
+            currentLevel: 1,
             dataBase: data,
         }
         this.onRestartGame = () => {
-            this.setState({ currentLevel: 1 })
+            const newGame = data.map(level => {
+                level.completed = false
+                level.words.map(word => {
+                    word.guessed = false
+                    return word
+                })
+                level.miscWords.map(word => {
+                    word.guessed = false
+                    return word
+                })
+                return level
+            })
+            console.log(newGame)
+            this.setState({ dataBase: newGame, currentLevel: 1 })
         }
         this.toggleModal = () => {
             this.setState(({ modalActive }) => {
@@ -25,6 +38,7 @@ export default class App extends React.Component {
             })
         }
         this.setCompletedLevel = (completedLevelObj) => {
+            console.log(this.state.dataBase)
             this.setState(({ dataBase }) => {
                 completedLevelObj.completed = true;
                 const newData = dataBase.map((el) => {
@@ -56,10 +70,12 @@ export default class App extends React.Component {
                     element.words.map((elWord) => {
                         const rightWord = elWord.word.toUpperCase()
                         if (rightWord === word) elWord.guessed = true
+                        return elWord
                     })
                     element.miscWords.map((elWord) => {
                         const miscWord = elWord.word.toUpperCase()
                         if (miscWord === word) elWord.guessed = true
+                        return elWord
                     })
                 }
                 return element
@@ -67,10 +83,7 @@ export default class App extends React.Component {
             this.setState({ dataBase: newData })
         }
         this.levelChecker = (dataBase, currentLevel) => {
-            return dataBase.filter(el => {
-                const { level } = el
-                if (level === currentLevel) return el
-            })
+            return dataBase.filter(el => el.level === currentLevel)
         }
         this.nextLevel = () => {
             this.setState(({ currentLevel }) => {

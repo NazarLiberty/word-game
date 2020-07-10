@@ -5,7 +5,7 @@ export default class MiscWords extends React.Component {
     render() {
         const { onToggleModal, isModalActive, miscWords = [] } = this.props
         const modalClass = isModalActive ? "misc-words-modal animate__animated animate__zoomIn" :
-            'misc-words-modal misc-words-modal--disabled animate__animated animate__flipOutY'
+            'misc-words-modal misc-words-modal--disabled'
         const miscWordsArr = miscWords.filter(el => el.guessed)
             .map(el =>
                 <div

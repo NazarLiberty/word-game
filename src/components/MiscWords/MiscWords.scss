@@ -36,9 +36,6 @@
             padding: 8px 0; 
         }
         &--disabled{
-            transition: ease .6s all;
-            height: 0;
-            width: 0;
-            font-size: 0px;
+           display: none;
         }
     }

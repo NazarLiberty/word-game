@@ -64,6 +64,9 @@ const Word = ({ word, stretch, wordIndex, guessed, isWordGuessed }) => {
             case 3: stretch = wordClass += ` index_${wordIndex}`; break;
             case 4: stretch = wordClass += ` index_${wordIndex}`; break;
             case 5: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 6: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 7: stretch = wordClass += ` index_${wordIndex}`; break;
+            case 8: stretch = wordClass += ` index_${wordIndex}`; break;
             default: break
         }
     }

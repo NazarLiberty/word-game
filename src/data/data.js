@@ -108,23 +108,30 @@ const data = [
     {
         completed: false,
         level: 5,
-        templateNumber: 1,
+        templateNumber: 5,
         words: [
-            { word: 'комар', guessed: true, stretch: false, },
-            { word: 'корма', guessed: true, stretch: false, },
-            { word: 'кора', guessed: true, stretch: true, },
-            { word: 'омар', guessed: true, stretch: true, },
-            { word: 'мак', guessed: true, stretch: true, },
-            { word: 'ром', guessed: true, stretch: true, }
+            { word: 'корм', guessed: false, stretch: false, },
+            { word: 'корма', guessed: false, stretch: false, },
+            { word: 'омар', guessed: false, stretch: true, },
+            { word: 'ром', guessed: false, stretch: false, },
+            { word: 'рак', guessed: false, stretch: true, },
+            { word: 'комар', guessed: false, stretch: true, },
+            { word: 'мак', guessed: false, stretch: false, },
+            { word: 'акр', guessed: false, stretch: true, },
+            { word: 'орк', guessed: false, stretch: true, },
         ],
         letters: [
-            { letter: 'А', id: 1 },
+            { letter: 'О', id: 1 },
             { letter: 'Р', id: 2 },
-            { letter: 'С', id: 3 },
+            { letter: 'К', id: 3 },
             { letter: 'А', id: 4 },
-            { letter: 'Т', id: 5 },
+            { letter: 'М', id: 5 },
         ],
-        miscWords: [{ word: "раст", guessed: false }]
+        miscWords: [{ word: "кома", guessed: false },
+        { word: "кора", guessed: false },
+        { word: "окра", guessed: false },
+        { word: "рок", guessed: false },
+        { word: "мор", guessed: false },]
     }
 ]
 export default data

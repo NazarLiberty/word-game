@@ -4,9 +4,9 @@ import { Fireworks } from 'fireworks/lib/react'
 
 const GamePassedScreen = ({ onRestartGame }) => {
     let fxProps = {
-        count: 3,
-        interval: 1000,
-        colors: ['#B80C09', '#040F16', '#FBFBFF'],
+        count: 2,
+        interval: 1500,
+        colors: ['#ffd700', '#c04847', '#0ba0e3', '#bada55'],
         calc: (props, i) => ({
             ...props,
             x: window.innerWidth / 2,
@@ -19,10 +19,11 @@ const GamePassedScreen = ({ onRestartGame }) => {
     return <>
         <Fireworks {...fxProps} />
         <div className="final-screen">
-            <p>You have PASSED MY GAME</p>
+            <p>Ти той, хто дотримався до кінця!</p>
             <button
                 className="final-screen__button"
                 onClick={restartGame}> Replay? :) </button>
+            <p className="copy">Inspired by WOW</p>
         </div>
     </>
 }

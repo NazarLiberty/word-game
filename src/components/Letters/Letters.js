@@ -7,8 +7,9 @@ export default class Letters extends React.Component {
         this.state = {
             input: [],
             selectedLetter: [],
+            lettersCoord: [],
         }
-        let lettersCoord = []
+
         this.setSelectedLetter = (id) => {
             this.setState(({ selectedLetter }) => {
                 const newArr = selectedLetter.map(el => el)
@@ -46,14 +47,19 @@ export default class Letters extends React.Component {
             wordChecker(element)
         }
 
-        window.onload = () => {
-            const element = document.getElementById('letters-block')
 
-            const inputRender = (event) => {
-                this.setLettersDataByMouse(event)
-            }
-            const getElemCoordTouch = (child) => {
-                if (lettersCoord.length < 5) lettersCoord.push({
+    }
+    componentDidMount() {
+
+        const element = document.getElementById('letters-block')
+
+        const inputRender = (event) => {
+            this.setLettersDataByMouse(event)
+        }
+        const getElemCoordTouch = (child) => {
+            if (this.state.lettersCoord.length < 5) this.setState(({ lettersCoord }) => {
+                const newCoords = lettersCoord.map(e => e)
+                newCoords.push({
                     value: child.innerText,
                     id: child.id,
                     xStart: Math.floor(child.getBoundingClientRect().x),
@@ -61,56 +67,57 @@ export default class Letters extends React.Component {
                     yStart: Math.floor(child.getBoundingClientRect().y),
                     yEnd: Math.floor(child.getBoundingClientRect().y + child.getBoundingClientRect().height)
                 })
-                else lettersCoord = []
-            }
-            const touchSelector = (event) => {
-                const childs = element.children
-                let elementX = event.changedTouches[0].clientX
-                let elementY = event.changedTouches[0].clientY
-                event.preventDefault()
-                lettersCoord.forEach(el => {
-                    const { yStart, yEnd, xStart, xEnd, value, id } = el
-                    if (elementY > yStart &&
-                        elementY < yEnd &&
-                        elementX > xStart &&
-                        elementX < xEnd)
-                        this.setLettersData(value, id)
-                })
-                for (let i = 0, child; child = childs[i]; i++) {
-                    getElemCoordTouch(child)
-                }
-            }
-            const addSelector = (event) => {
-                const childs = element.children
-                const text = event.target.innerText
-                if (text.length === 1) this.setLettersDataByMouse(event)
-                for (let i = 0, child; child = childs[i]; i++) {
-                    child.addEventListener('mouseover', inputRender)
-                }
-            }
-            const removeSelector = () => {
-                this.wordChecker(this.state.input)
-                this.props.nextLevelChecker()
-                this.setState({
-                    input: [],
-                    selectedLetter: [],
-                    touchedLine: []
-                })
-                const childs = element.children
-                for (let i = 0, child; child = childs[i]; i++) {
-                    child.removeEventListener('mouseover', inputRender)
-                }
-            }
-            element.addEventListener('mousedown', addSelector)
-            document.addEventListener('mouseup', removeSelector)
-
-            element.addEventListener('touchmove', touchSelector)
-            element.addEventListener('touchstart', touchSelector)
-            document.addEventListener('touchend', removeSelector)
+                return { lettersCoord: newCoords }
+            })
+            else this.setState({ lettersCoord: [] })
         }
+        const touchSelector = (event) => {
+            const childs = element.children
+            let elementX = event.changedTouches[0].clientX
+            let elementY = event.changedTouches[0].clientY
+            event.preventDefault()
+            this.state.lettersCoord.forEach(el => {
+                const { yStart, yEnd, xStart, xEnd, value, id } = el
+                if (elementY > yStart &&
+                    elementY < yEnd &&
+                    elementX > xStart &&
+                    elementX < xEnd)
+                    this.setLettersData(value, id)
+            })
+            for (let i = 0, child; child = childs[i]; i++) {
+                getElemCoordTouch(child)
+            }
+        }
+        const addSelector = (event) => {
+            const childs = element.children
+
+            const text = event.target.innerText
+            if (text.length === 1) this.setLettersDataByMouse(event)
+            for (let i = 0, child; child = childs[i]; i++) {
+                child.addEventListener('mouseover', inputRender)
+            }
+        }
+        const removeSelector = () => {
+            this.wordChecker(this.state.input)
+            this.props.nextLevelChecker()
+            this.setState({
+                input: [],
+                selectedLetter: [],
+            })
+            const childs = element.children
+            for (let i = 0, child; child = childs[i]; i++) {
+                child.removeEventListener('mouseover', inputRender)
+            }
+        }
+        element.addEventListener('mousedown', addSelector)
+        document.addEventListener('mouseup', removeSelector)
+
+        element.addEventListener('touchmove', touchSelector)
+        element.addEventListener('touchstart', touchSelector)
+        document.addEventListener('touchend', removeSelector)
+
 
     }
-
     render() {
         const { completed, onToggleModal, miscWords, letters } = this.props
         const { input, selectedLetter } = this.state
